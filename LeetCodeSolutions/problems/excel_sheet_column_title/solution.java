@@ -1,5 +1,13 @@
 class Solution {
     public String convertToTitle(int n) {
-        return n == 0 ? "" : convertToTitle(--n / 26) + (char)('A' + (n % 26));
+        StringBuilder result = new StringBuilder();
+
+        while(n>0){
+            result.append((char)('A' + --n % 26));
+            n /= 26;
+        }
+
+        result.reverse();
+        return result.toString();
     }
 }
