@@ -13,28 +13,45 @@ class Solution {
         if(head==null || head.next==null) {
             return true;
         }
-        int size = 0;
+        ListNode firstHalfEnd = endOfFirstHalf(head);
+        ListNode secondHalfStart = reverseList(firstHalfEnd.next);
+        
+        ListNode p1 = head;
+        ListNode p2 = secondHalfStart;
+        
+        boolean result = true;
+        while(result && p1!=null && p2 !=null) {
+            if(p1.val != p2.val) {
+                result = false;
+            }
+            p1 = p1.next;
+            p2 = p2.next;
+        }
+        
+        firstHalfEnd.next = reverseList(secondHalfStart);
+        return result;
+    }
+    
+    
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;
         ListNode curr = head;
         while(curr!=null) {
-            size++;
-            curr = curr.next;
+            ListNode temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
         }
-        int halfWay = size/2;
-        int counter = 0;
-        int[] lookup = new int[halfWay];
-        curr = head;
-        while(counter<halfWay) {
-            lookup[counter++] = curr.val;
-            curr = curr.next;
+        return prev;
+    }
+    
+    public ListNode endOfFirstHalf(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast.next!=null && fast.next.next!=null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        if(size%2!=0)
-            curr = curr.next;
-        while(curr!=null) {
-            if(curr.val != lookup[--counter]) {
-                return false;
-            }
-            curr = curr.next;
-        }
-        return true;
+        return slow;
     }
 }
