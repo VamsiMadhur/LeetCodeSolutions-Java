@@ -22,10 +22,8 @@ class Solution {
     }
     
     public int[] findTilt2(TreeNode root) {
+        int[] result = new int[2];
         if(root==null) {
-            int[] result = new int[2];
-            result[0]=0;
-            result[1]=0;
             return result;
         }
         int[] leftSum = findTilt2(root.left);
@@ -38,7 +36,6 @@ class Solution {
             diff = (leftSum[0]-rightSum[0]);
         }
         
-        int[] result = new int[2];
         result[0] = leftSum[0]+rightSum[0]+root.val;
         result[1] = diff+leftSum[1]+rightSum[1];
         return result;
