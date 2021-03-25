@@ -14,7 +14,8 @@
  * }
  */
 class Solution {
-    private int result = 0;
+    
+     private int result = 0;
     public int sumNumbers(TreeNode root) {
         if(root == null) {
             return 0;
@@ -36,5 +37,4 @@ class Solution {
         sumNumbers(root.left, sum);  
         sumNumbers(root.right, sum);
     }
-    
 }
