@@ -13,30 +13,26 @@ class Solution {
         if(head == null || head.next == null) {
             return head;
         }
-        ListNode dummyHead = new ListNode(0, head);
         
-        ListNode curr = head;
-        ListNode part = dummyHead;
-        ListNode prev = dummyHead;
+        ListNode head1 = new ListNode(0);
+        ListNode ptr1 = head1;
         
-        while(curr != null) {
-            if(curr.val < x) {
-                if(part!=prev) {
-                    prev.next = curr.next;
-                    curr.next = part.next;
-                    part.next = curr;
-                    part = curr;
-                    curr = prev.next;
-                } else {
-                    part = curr;
-                    prev = curr;
-                    curr = curr.next;
-                }
+        ListNode head2 = new ListNode(0);
+        ListNode ptr2 = head2;
+        
+        while(head!=null) {
+            if(head.val < x) {
+                    ptr1.next = head;
+                    ptr1 = ptr1.next;
             } else {
-                prev = curr;
-                curr = curr.next;
+                    ptr2.next = head;
+                    ptr2 = ptr2.next;
             }
+            head = head.next;
         }
-        return dummyHead.next;
+        
+        ptr1.next = head2.next;
+        ptr2.next = null;
+        return head1.next;
     }
 }
