@@ -1,37 +1,63 @@
+class UnionFind {
+    int[] parent;
+    int[] size;
+    
+    public UnionFind(int n) {
+        parent = new int[n];
+        size = new int[n];
+        for(int i=0; i<n; i++) {
+            parent[i]=i;
+            size[i]=1;
+        }
+    }
+    
+    public int find(int A) {
+        int root = A;
+        
+        while(parent[A] != root) {
+            root = parent[A];
+        }
+        
+        int temp = A;
+        while(temp != root) {
+            int oldroot = parent[temp];
+            parent[temp] = root;
+            temp = oldroot;
+        }
+        
+        return root;
+    }
+    
+    public boolean union(int A, int B) {
+        int parentA = find(A);
+        int parentB = find(B);
+        
+        if(parentA == parentB) return false;
+        
+        if(size[parentA] < size[parentB]) {
+            parent[parentA] = parentB;
+            size[parentB] += size[parentA];
+        } else {
+            parent[parentB] = parentA;
+            size[parentA] += size[parentB];
+        }
+        return true;
+    }
+}
+
+
+
 class Solution {
     public boolean validTree(int n, int[][] edges) {
-       
-        List<List<Integer>> adjList = new ArrayList<>();
+        if(edges.length != (n-1)) return false;
         
-        for(int i=0; i<n; i++) {
-            adjList.add(new ArrayList<>());
-        }
+        UnionFind unionFind = new UnionFind(n);
         
         for(int[] edge : edges) {
-            adjList.get(edge[0]).add(edge[1]);
-            adjList.get(edge[1]).add(edge[0]);
+            int A = edge[0];
+            int B = edge[1];
+            if(!unionFind.union(A, B)) return false;
         }
-        
-        Stack<Integer> stack = new Stack<>();
-        stack.push(0);
-        
-        Set<Integer> visited = new HashSet<>();
-        visited.add(0);
-        
-        while(!stack.isEmpty()) {
-            Integer node = stack.pop();
-            
-            for(Integer neighbor : adjList.get(node)) {
-                if(visited.contains(neighbor)) return false;
-                
-                stack.push(neighbor);
-                visited.add(neighbor);
-                
-                adjList.get(neighbor).remove(node);
-            }
-        }
-        
-        
-        return visited.size()==n;
+        return true;
     }
 }
