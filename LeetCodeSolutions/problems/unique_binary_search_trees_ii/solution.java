@@ -14,30 +14,26 @@
  * }
  */
 class Solution {
-
-    
     public List<TreeNode> generateTrees(int n) {
         if(n==0) {
-            return new ArrayList<TreeNode>();
+            return new ArrayList<>();
         }
-        return generateTrees(1,n);
+        return generateTrees(1, n);
     }
     
     public List<TreeNode> generateTrees(int low, int high) {
         List<TreeNode> result = new ArrayList<>();
-        
         if(low>high) {
             result.add(null);
             return result;
         }
         
         for(int i=low; i<=high; i++) {
-            List<TreeNode> leftTrees = generateTrees(low, i-1);
-            List<TreeNode> rightTrees = generateTrees(i+1, high);
-            
-            for (TreeNode l : leftTrees) {
-                for(TreeNode r : rightTrees) {
-                    result.add(new TreeNode(i,l,r));
+            List<TreeNode> left = generateTrees(low, i-1);
+            List<TreeNode> right = generateTrees(i+1, high);
+            for(TreeNode l : left) {
+                for(TreeNode r : right) {
+                    result.add(new TreeNode(i, l, r));
                 }
             }
         }
