@@ -1,15 +1,13 @@
 class Solution {
     public int climbStairs(int n) {
-        if(n==1) {
-            return 1;
-        }
-        int first=1;
-        int second=2;
+        if(n<=2) return n;
+        int a = 1;
+        int b = 2;
         for(int i=3; i<=n; i++) {
-            int temp = first+second;
-            first = second;
-            second = temp;
+            int temp = a+b;
+            a = b;
+            b = temp;
         }
-        return second;
+        return b;
     }
 }
