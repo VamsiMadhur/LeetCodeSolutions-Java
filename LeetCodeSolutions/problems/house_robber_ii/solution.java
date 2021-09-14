@@ -1,31 +1,22 @@
 class Solution {
     public int rob(int[] nums) {
+        if(nums.length == 1) return nums[0];
+        if(nums.length == 2) return Math.max(nums[0], nums[1]);
+        
+        return Math.max(rob(nums, 0), rob(nums, 1));
+    }
+    
+    public int rob(int[] nums, int low) {
         int n = nums.length;
-        if(n==1) {
-            return nums[0];
-        } if(n == 2) {
-            return Math.max(nums[0], nums[1]);
+        
+        int a = 0;
+        int b = nums[low];
+        
+        for(int i=1; i<n-1; i++) {
+            int temp = Math.max(b, a+nums[low+i]);
+            a = b;
+            b = temp;
         }
-        
-        int iPlus2 = 0;
-        int iPlus1 = nums[n-1];
-        
-        for(int i=n-2; i>=1; i--) {
-            int temp = Math.max(iPlus1, iPlus2+nums[i]);
-            iPlus2 = iPlus1;
-            iPlus1 = temp;
-        }
-        int answer1 = iPlus1;
-        
-        iPlus2 = 0;
-        iPlus1 = nums[n-2];
-        for(int i=n-3; i>=0; i--) {
-            int temp = Math.max(iPlus1, iPlus2+nums[i]);
-            iPlus2 = iPlus1;
-            iPlus1 = temp;
-        }
-        int answer2 = iPlus1;
-        
-        return Math.max(answer1, answer2);
-    } 
+        return Math.max(a,b);
+     }
 }
