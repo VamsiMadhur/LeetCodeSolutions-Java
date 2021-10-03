@@ -4,12 +4,9 @@ class Solution {
         int sum = -100000;
         int currSum = -100000;
         
-        for(int i=0; i<n; i++) {
-            if(currSum < 0) {
-                currSum = nums[i];
-            } else {
-                currSum += nums[i];
-            }
+        for(int i=0; i<nums.length; i++) {
+            if(currSum < 0) currSum = nums[i];
+            else currSum += nums[i];
             sum = Math.max(sum, currSum);
         }
         return sum;
