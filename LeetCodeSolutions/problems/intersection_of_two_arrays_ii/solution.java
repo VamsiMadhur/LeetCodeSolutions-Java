@@ -1,12 +1,12 @@
 class Solution {
     public int[] intersect(int[] nums1, int[] nums2) {
+        List<Integer> result = new ArrayList<>();
         Arrays.sort(nums1);
         Arrays.sort(nums2);
-        List<Integer> result = new ArrayList<Integer>();
-        int i=0,j=0;
-        while(i<nums1.length && j<nums2.length) {
-            
-            if(nums1[i]==nums2[j]) {
+        int i=0; int m = nums1.length; 
+        int j=0; int n = nums2.length;
+        while(i<m && j<n) {
+            if(nums1[i] == nums2[j]) {
                 result.add(nums1[i]);
                 i++;
                 j++;
@@ -16,12 +16,12 @@ class Solution {
                 i++;
             }
         }
-        int[] resultArr = new int[result.size()];
-        int k=0;
-        for(int num : result) {
-            resultArr[k] = num;
-            k++;
+        int[] resultArray = new int[result.size()];
+        i=0;
+        for(int p : result) {
+            resultArray[i] = p;
+            i++;
         }
-        return resultArr;
+        return resultArray;
     }
 }
