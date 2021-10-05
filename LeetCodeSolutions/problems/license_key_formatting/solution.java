@@ -1,17 +1,18 @@
 class Solution {
-    public String licenseKeyFormatting(String S, int K) {
-        StringBuffer result = new StringBuffer();
-        int count = 0;
-        for(int i=S.length()-1; i>=0; i--) {
-            char temp = S.charAt(i);
-            if(temp != '-') {
-                if(count == K) {
-                    result.append("-");
-                    count = 0;
+    public String licenseKeyFormatting(String s, int k) {
+        int i=0;
+        StringBuilder result = new StringBuilder();
+        char[] sa = s.toCharArray();
+        for(int j = sa.length-1; j>=0; j--) {
+            char c = sa[j];
+            if('-' == c) continue;
+            else {
+                 if(i == k) {
+                    result.append('-');
+                    i=0;
                 }
-                result.append(temp);
-                count++;
-               
+                result.append(c);
+                i++;
             }
         }
         return result.reverse().toString().toUpperCase();
