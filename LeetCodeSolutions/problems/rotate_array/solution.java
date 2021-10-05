@@ -3,18 +3,18 @@ class Solution {
         int n = nums.length;
         k = k%n;
         if(k!=0) {
-            int count=0;
+            int count = 0;
             for(int i=0; count<n; i++) {
                 int current = i;
                 int temp = nums[i];
                 do {
                     int next = (i+k)%n;
-                    int currtemp = nums[next];
+                    int x = nums[next];
                     nums[next] = temp;
-                    temp = currtemp;
-                    count++;
+                    temp = x;
                     i = next;
-                } while(i!= current);
+                    count++;
+                } while(i!=current);
             }
         }
     }
