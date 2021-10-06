@@ -1,9 +1,9 @@
 class Solution {
     public String reverseWords(String s) {
-        String[] sarr = s.split(" ");
+        String[] words = s.split(" ");
         StringBuilder result = new StringBuilder();
-        for(String sa : sarr) {
-            result.append(new StringBuffer(sa).reverse()).append(" ");
+        for(String word : words) {
+            result.append(new StringBuilder(word).reverse()).append(" ");
         }
         return result.toString().trim();
     }
