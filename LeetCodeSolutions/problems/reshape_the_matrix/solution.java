@@ -1,22 +1,15 @@
 class Solution {
-    public int[][] matrixReshape(int[][] nums, int r, int c) {
-        int or = nums.length;
-        int oc = nums[0].length;
-        if((or*oc)!=(r*c)) {
-            return nums;
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+        int m = mat.length;
+        int n = mat[0].length;
+        if(m*n != r*c) return mat;
+        
+        int total = m*n;
+        int[][] res = new int[r][c];
+        
+        for(int i=0; i<total; i++) {
+            res[i/c][i%c] = mat[i/n][i%n];
         }
-        int[][] result = new int[r][c];
-        int pi = 0;
-        int pj = 0;
-        for(int i=0; i<or; i++) {
-            for(int j=0; j<oc; j++) {
-                result[pi][pj++] = nums[i][j];
-                if(pj == c) {
-                    pi++;
-                    pj=0;
-                }
-            }
-        }
-        return result;
+        return res;
     }
 }
