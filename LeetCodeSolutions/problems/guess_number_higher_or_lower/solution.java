@@ -9,20 +9,14 @@
 
 public class Solution extends GuessGame {
     public int guessNumber(int n) {
-        return guessNumber(1,n);
-    }
-    
-    public int guessNumber(int low, int high) {
-        int guess = low+ (high-low)/2;
-        int val = guess(guess);
-        if(val == 0) {
-            return guess;
-        } else if (val == 1) {
-            return guessNumber(guess+1, high);
-        } else {
-            return guessNumber(low, guess-1);
+        int low = 1;
+        int high = n;
+        while(true) {
+            int mid = low + (high-low)/2;
+            int ans = guess(mid);
+            if(ans == 0) return mid;
+            else if(ans == -1) high = mid-1;
+            else low = mid+1;
         }
     }
-    
-    
 }
