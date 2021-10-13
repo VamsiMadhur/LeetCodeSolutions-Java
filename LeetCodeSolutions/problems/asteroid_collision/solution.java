@@ -11,19 +11,18 @@ class Solution {
                 boolean flag = true;
                 
                 while(count >= 0) {
-                    if(result[count] < 0) {
-                        flag = false;
-                        result[++count] = asteroids[i];
-                        break;
-                    }
-                    if((-1*asteroids[i]) > result[count]) {
-                        count--;
-                    } else if((-1*asteroids[i]) == result[count]) {
-                        count--;
-                        flag = false;
-                        break;
+                    if(result[count] > 0) {
+                        if((-1*asteroids[i]) > result[count]) {
+                            count--;
+                        } else if((-1*asteroids[i]) == result[count]) {
+                            count--;
+                            flag = false;
+                            break;
+                        } else {
+                            flag = false;
+                            break;
+                        }
                     } else {
-                        flag = false;
                         break;
                     }
                 }
