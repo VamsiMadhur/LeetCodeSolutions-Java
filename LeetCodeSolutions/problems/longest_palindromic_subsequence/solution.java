@@ -2,17 +2,12 @@ class Solution {
     public int longestPalindromeSubseq(String s) {
         int n = s.length();
         
-        char[] sa = new char[n+1];
-        sa[0] = '0'; int count = 1;
-        for(char c : s.toCharArray()) {
-            sa[count++] = c;
-        }
+        char[] sa = s.toCharArray();
+        int[][] dp = new int[n][n];
         
-        int[][] dp = new int[n+1][n+1];
-        
-        for(int i=n; i>=1; i--) {
+        for(int i=n-1; i>=0; i--) {
             dp[i][i] = 1;
-            for(int j=i+1; j<=n; j++) {
+            for(int j=i+1; j<n; j++) {
                 char s1 = sa[i];
                 char s2 = sa[j];
                 
@@ -24,6 +19,6 @@ class Solution {
             }
         }
         
-        return dp[1][n];
+        return dp[0][n-1];
     }
 }
