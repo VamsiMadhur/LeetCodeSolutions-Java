@@ -9,18 +9,15 @@
  */
 
 class Solution {
-    
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        while(root!=null) {
-            if(root.val > p.val && root.val > q.val) {
+        while(root != null) {
+            if(p.val < root.val && q.val < root.val) 
                 root = root.left;
-            } else if(root.val < p.val && root.val < q.val) {
+            else if(p.val > root.val && q.val > root.val)
                 root = root.right;
-            } else {
+            else 
                 return root;
-            }
         }
         return null;
     }
-    
 }
