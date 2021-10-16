@@ -14,34 +14,28 @@
  * }
  */
 class Solution {
-    
-    TreeNode prev = null;
-    
     boolean result = true;
-    
+    Integer prev = null;
     public boolean isValidBST(TreeNode root) {
-         if(root == null) {
-             return true;
-         }
-        isValidBST1(root);
+        if(root == null) return true;
+        inorder(root);
         return result;
     }
     
-    public void isValidBST1(TreeNode root) {
-        if(!result) {
-            return;
-        }
-        if(root==null) {
-            return;
-        }
-        isValidBST1(root.left);
+    public void inorder(TreeNode root) {
+        if(!result) return;
         
-        if(prev != null && prev.val >= root.val) {
-            result=false;
+        if(root == null) return;
+        inorder(root.left);
+        
+        if(prev!=null && prev.intValue() >= root.val) {
+            result = false;
             return;
         }
-        prev = root;
         
-        isValidBST1(root.right);
+        if(!result) return;
+        prev = root.val;
+        inorder(root.right);
+        return ;
     }
 }
