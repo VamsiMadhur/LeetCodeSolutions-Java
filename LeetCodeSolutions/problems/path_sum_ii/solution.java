@@ -14,28 +14,32 @@
  * }
  */
 class Solution {
+    List<List<Integer>> result = new LinkedList<>();
+    
+    LinkedList<Integer> path  = new LinkedList<>();
+    
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-        List<List<Integer>> result = new ArrayList<>();
-        
-        List<Integer> currentResult = new ArrayList<>();
-        pathSum(root, targetSum, currentResult, result);
+        helper(root, targetSum);
         return result;
     }
     
-    public void pathSum(TreeNode root, int targetSum, List<Integer> currentResult, List<List<Integer>> result) {
+    public void helper(TreeNode root, int targetSum) {
+        if(root == null) return;
         
-        if(root == null) {
+        if(root.left == null && root.right == null && targetSum == root.val) {
+            path.add(root.val);
+            result.add(new LinkedList<>(path));
+            path.removeLast();
             return;
         }
-        currentResult.add(root.val);
         
-        if(root.val == targetSum && root.left==null && root.right==null) {
-            result.add(new ArrayList<>(currentResult));
-        } else {
-            pathSum(root.left, targetSum - root.val, currentResult, result);
-            pathSum(root.right, targetSum - root.val, currentResult, result);
-        }
+        path.add(root.val);
+        if(root.left != null)
+            helper(root.left, targetSum-root.val);
+        if(root.right != null)
+            helper(root.right, targetSum-root.val);
+        path.removeLast();
         
-        currentResult.remove(currentResult.size()-1);
+        
     }
 }
