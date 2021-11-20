@@ -1,28 +1,22 @@
 class Solution {
-    public boolean isStrobogrammatic(String nums) {
+    public boolean isStrobogrammatic(String num) {
         
-        int i=0;
-        int j=nums.length()-1;
+        char[] cache = new char[10];
+        Arrays.fill(cache, '*');
+        cache[0] = '0';
+        cache[1] = '1';
+        cache[6] = '9';
+        cache[8] = '8';
+        cache[9] = '6';
         
+        char[] c = num.toCharArray();
+        int i = 0;
+        int j = c.length-1;
         while(i<=j) {
-            if(nums.charAt(i) == '0') {
-                if(nums.charAt(j) != '0') return false;
-            } else if(nums.charAt(i) == '1') {
-                if(nums.charAt(j) != '1') return false;
-            } else if(nums.charAt(i) == '6') {
-                if(nums.charAt(j) != '9') return false;
-            } else if(nums.charAt(i) == '9') {
-                if(nums.charAt(j) != '6') return false;
-            } else if(nums.charAt(i) == '8') {
-                if(nums.charAt(j) != '8') return false;
-            } else {
-                return false;
-            }
+            if(c[i] != cache[c[j]-'0']) return false;
             i++;
             j--;
         }
-   
         return true;
     }
-    
 }
