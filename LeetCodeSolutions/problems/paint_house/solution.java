@@ -1,20 +1,14 @@
 class Solution {
     public int minCost(int[][] costs) {
-        int cost = 0;
-        int red = costs[0][0];
-        int blue = costs[0][1];
-        int green = costs[0][2];
-        
-        for(int i=1; i<costs.length; i++) {
-            int tempred =  costs[i][0] + Math.min(blue, green);
-            int tempblue = costs[i][1] + Math.min(red, green);
-            int tempgreen = costs[i][2] + Math.min(red, blue);
-            
-            red = tempred;
-            blue = tempblue;
-            green = tempgreen;
+        int[] cache = new int[3];
+        for(int[] cost : costs) {
+            int a = Math.min(cache[1], cache[2]) + cost[0];
+            int b = Math.min(cache[0], cache[2]) + cost[1];
+            int c = Math.min(cache[0], cache[1]) + cost[2];
+            cache[0] = a;
+            cache[1] = b;
+            cache[2] = c;
         }
-        
-        return Math.min(red, Math.min(blue, green));
+        return Math.min(cache[0], Math.min(cache[1], cache[2]));
     }
 }
