@@ -14,26 +14,23 @@
  * }
  */
 class Solution {
-    
+    double diff = 2000000001;
+    int nodevalue = 0;
     public int closestValue(TreeNode root, double target) {
-        int result = root.val;
-        
-        while(root != null) {
-            if(root.val == target) {
-                return root.val;
-            } else {
-                if(Math.abs(root.val-target) < Math.abs(result-target)) {
-                    result = root.val;
-                }
-                
-                if(root.val > target) {
-                    root = root.left;
-                } else {
-                    root = root.right;
-                }
+        if(root == null) return nodevalue;
+        if(root.val < target) {
+            if(diff > target - root.val) {
+                diff = target - root.val;
+                nodevalue = root.val;
             }
+            return closestValue(root.right, target);
+        } else {
+            if(diff > root.val - target) {
+                diff = root.val - target;
+                nodevalue = root.val;
+            }
+            return closestValue(root.left, target);
         }
-        return result;
         
     }
 }
