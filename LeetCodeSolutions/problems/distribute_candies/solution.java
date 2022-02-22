@@ -1,10 +1,15 @@
 class Solution {
     public int distributeCandies(int[] candyType) {
-        Set<Integer> candies = new HashSet<>();
-        for(int type : candyType) {
-            candies.add(type);
+        int noOfCandies = candyType.length/2;
+        boolean[] cache = new boolean[200001];
+        int candyCount = 0;
+        for(int candy : candyType) {
+            if(!cache[candy+100000]) {
+                cache[candy+100000] = true;
+                candyCount++;
+                if(candyCount == noOfCandies) break;
+            }
         }
-        int n = candyType.length/2;
-        return candies.size() >= n ? n : candies.size();
+        return Math.min(noOfCandies, candyCount);
     }
 }
