@@ -1,11 +1,13 @@
 class Solution {
 
     int[] root, rank;
+    int count = 0;
     
     public int countComponents(int n, int[][] edges) {
         
         root = new int[n];
         rank = new int[n];
+        count = n;
         
         for(int i=0; i<n; i++) root[i] = i;
         
@@ -13,10 +15,6 @@ class Solution {
             union(edge[0], edge[1]);
         }
         
-        int count = 0;
-        for(int i=0; i<n; i++) {
-            if(root[i] == i) count++;
-        }
         return count;
     }
     
@@ -41,5 +39,6 @@ class Solution {
                 rank[b]++;
             }
         }
+        count--;
     }
 }
