@@ -3,7 +3,7 @@ class Solution {
         int rows = obstacleGrid.length;
         int columns = obstacleGrid[0].length;
         
-        if(obstacleGrid[0][0] == 1) {
+        if(obstacleGrid[0][0] == 1 || obstacleGrid[rows-1][columns-1] == 1) {
             return 0;
         }
         
