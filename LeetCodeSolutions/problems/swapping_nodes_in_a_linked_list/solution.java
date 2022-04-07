@@ -26,23 +26,20 @@ class Solution {
             prevSlow = prevSlow.next;
         }
         
-        boolean flag = (prevSlow == first);
-        if(prevfirst == slow) {
-            flag = true;
-            ListNode temp1 = first, temp2 = prevfirst;
-            first = slow;
-            prevfirst = prevSlow;
-            slow = temp1;
-            prevSlow = temp2;
-            
-        }
         
-        ListNode temp = slow.next;
-        prevfirst.next = slow;
-        if(flag) {
+        if(prevSlow == first) {
+            ListNode temp = slow.next;
+            prevfirst.next = slow;
             slow.next = first;
             first.next = temp;
+        } else if(prevfirst == slow) {
+            ListNode temp = first.next;
+            prevSlow.next = first;
+            first.next = slow;
+            slow.next = temp;
         } else {
+            ListNode temp = slow.next;
+            prevfirst.next = slow;
             slow.next = first.next;
             prevSlow.next = first;
             first.next = temp;
