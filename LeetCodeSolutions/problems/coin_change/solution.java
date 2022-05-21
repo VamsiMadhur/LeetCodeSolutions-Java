@@ -4,11 +4,9 @@ class Solution {
         int[] dp = new int[max];
         Arrays.fill(dp, max);
         dp[0]=0;
-        for(int i=1; i<max; i++ ) {
-            for(int j=0; j<coins.length; j++) {
-                if(coins[j] <= i) {
-                    dp[i] = Math.min(dp[i], 1 + dp[i-coins[j]]);
-                }
+        for(int coin:coins) {
+            for(int i=coin; i<max; i++ ) {
+                dp[i] = Math.min(dp[i], 1 + dp[i-coin]);
             }
         }
         return dp[amount] == max ? -1 : dp[amount];
