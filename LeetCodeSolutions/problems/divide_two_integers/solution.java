@@ -19,7 +19,7 @@ class Solution {
         int maxBit = 0;
         while(divisor >= HALF_INT_MIN && divisor + divisor >= dividend) {
             maxBit += 1;
-            divisor += divisor ;
+            divisor <<= 1;
         }
        
         int quotient = 0;
@@ -31,9 +31,7 @@ class Solution {
             }
             divisor = (divisor+1) >> 1;
         }
-        if(negative) {
-            quotient = -quotient;
-        }
-        return quotient;
+    
+        return negative? -quotient : quotient;
     }
 }
