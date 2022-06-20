@@ -1,5 +1,5 @@
 class TrieNode {
-    Map<Character, TrieNode> child = new HashMap<>();
+    TrieNode[] child = new TrieNode[26];
     List<String> words = new ArrayList<>();
 }
 class Solution {
@@ -12,14 +12,10 @@ class Solution {
         char[] search = searchWord.toCharArray();
         int currSize = 0, n=search.length;
         for(char c : search) {
-            root = root.child.get(c);
+            root = root.child[c-'a'];
             if(root == null) 
                 break;
-            else if(root.words.size() <= 3)
-                result.add(root.words);
-            else
-                result.add(root.words.subList(0,3));
-            
+            result.add(root.words);
             currSize++;
         }
         for(int i=currSize; i<n; i++) 
@@ -33,8 +29,11 @@ class Solution {
             TrieNode curr = root;
              
              for(char c : word) {
-                 curr = curr.child.computeIfAbsent(c, k->new TrieNode());
-                 curr.words.add(product);
+                 if(curr.child[c-'a'] == null) 
+                     curr.child[c-'a'] = new TrieNode();
+                 curr = curr.child[c-'a'];
+                 if(curr.words.size() < 3)
+                    curr.words.add(product);
              }
          }
     }
