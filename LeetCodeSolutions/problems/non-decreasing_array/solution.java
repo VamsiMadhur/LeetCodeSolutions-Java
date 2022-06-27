@@ -1,14 +1,16 @@
 class Solution {
     public boolean checkPossibility(int[] nums) {
-        int modified=0, prev = nums[0];
-        for (int i=1; i<nums.length; i++) {
-            if (nums[i] < prev) {
-                if (modified++ == 1) return false;
-                if (i>=2 && nums[i-2] > nums[i]) continue;
+        boolean modified = false;
+        int prev = nums[0];
+        for(int i=1; i<nums.length; i++) {
+            if(prev > nums[i]) {
+                if(modified) return false;
+                modified = true;
+                if(i>=2 && nums[i-2] > nums[i]) continue;
             }
             prev = nums[i];
-	    }
-	    return true;
+        }
+        return true;
     }
     
 }
