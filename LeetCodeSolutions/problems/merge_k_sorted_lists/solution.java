@@ -11,39 +11,40 @@
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
         int n = lists.length;
-        if(n <= 0) return null;
+        if(n<1) return null;
         if(n==1) return lists[0];
         
-        ListNode[] newLists = new ListNode[(n+1)/2];
-        int count=0;
+        ListNode[] newlists = new ListNode[(n+1)/2];
+        int count = 0;
         
-        for(int i=0; i<n-1; i+=2) {
+        for(int i=0; i<n-1; i=i+2) {
             ListNode first = lists[i];
             ListNode second = lists[i+1];
             
             ListNode temp = new ListNode(0);
-            ListNode tHead = temp;
+            ListNode t = temp;
             
             while(first!=null && second!=null) {
                 if(first.val < second.val) {
                     temp.next = first;
+                    temp = temp.next;
                     first = first.next;
                 } else {
                     temp.next = second;
+                    temp = temp.next;
                     second = second.next;
                 }
-                temp = temp.next;
             }
             if(first == null) {
-                temp.next = second;
+                temp.next=second;
             } else {
-                temp.next = first;
+                temp.next=first;
             }
-            newLists[count++] = tHead.next;
+            newlists[count++] = t.next;
         }
         if(n%2 == 1) {
-            newLists[count] = lists[n-1];
+            newlists[count] = lists[n-1];
         }
-        return mergeKLists(newLists);
+        return mergeKLists(newlists);
     }
 }
